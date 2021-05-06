@@ -17,6 +17,14 @@ namespace BookCart.Controllers
             _bookService = bookService;
         }
 
+        [HttpGet]
+        [Route("GetCategoriesList")]
+        public async Task<IEnumerable<Categories>> CategoryDetails()
+        {
+            return await Task.FromResult(_bookService.GetCategories());
+        }
+        
+        
         public async Task<List<Book>> Get()
         {
             return await Task.FromResult(_bookService.GetAllBooks());

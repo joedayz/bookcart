@@ -7,5 +7,6 @@ namespace BookCart.Interfaces
     {
         List<Book> GetAllBooks();
 
+        List<Categories> GetCategories();
     }
 }

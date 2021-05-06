@@ -26,5 +26,12 @@ namespace BookCart.DataAccess
                 throw;
             }
         }
+
+        public List<Categories> GetCategories()
+        {
+            List<Categories> lstCategories = new List<Categories>();
+            lstCategories = (from CategoriesList in _dbContext.Categories select CategoriesList).ToList();
+            return lstCategories;
+        }
     }
 }

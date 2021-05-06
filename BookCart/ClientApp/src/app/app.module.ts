@@ -9,12 +9,14 @@ import {AppRoutingModule} from "./app-routing.module";
 import {NavBarComponent} from "./components/nav-bar/nav-bar.component";
 import {NgMaterialModule} from './ng-material/ng-material.module';
 import {HomeComponent} from "./components/home/home.component";
+import {BookFilterComponent} from "./components/book-filter/book-filter.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
-    HomeComponent
+    HomeComponent,
+    BookFilterComponent
   ],
   imports: [
     BrowserModule,

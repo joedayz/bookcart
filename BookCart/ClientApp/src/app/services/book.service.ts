@@ -20,4 +20,11 @@ export class BookService {
     )
   }
 
+  getCategories() {
+    return this.http.get(this.baseURL + "GetCategoriesList").pipe(
+      map(response=>{
+        return response;
+      })
+    );
+  }
 }
