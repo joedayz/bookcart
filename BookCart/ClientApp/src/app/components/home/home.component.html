@@ -1,0 +1,13 @@
+<div class="row flex-xl-nowrap">
+  <div class="col-md-3">
+    <!-- filtro por categorias -->
+  </div>
+
+  <div class="col">
+    <div *ngIf="books && books.length>0"  fxLayout="row" fxFlex.md="70" fxLayoutWrap class="card-deck-container">
+      <div fxFlex *ngFor="let book of books" class="card-item">
+          <!-- componente para cada libro -->
+      </div>
+    </div>
+  </div>
+</div>

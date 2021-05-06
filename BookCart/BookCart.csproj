@@ -26,6 +26,8 @@
         <!-- Don't publish the SPA source files, but do show them in the project files list -->
         <Content Remove="$(SpaRoot)**" />
         <Content Include="ClientApp\src\app\app.component.scss" />
+        <Content Include="ClientApp\src\app\components\home\home.component.html" />
+        <Content Include="ClientApp\src\app\components\home\home.component.scss" />
         <Content Include="ClientApp\src\app\components\nav-bar\nav-bar.component.html" />
         <Content Include="ClientApp\src\app\components\nav-bar\nav-bar.component.scss" />
         <Content Include="ClientApp\src\app\components\nav-bar\_navbar-theme.scss" />
@@ -43,11 +45,13 @@
         <None Remove="$(SpaRoot)**" />
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
         <None Include="ClientApp\src\app\app-routing.module.ts" />
+        <None Include="ClientApp\src\app\components\home\home.component.ts" />
         <None Include="ClientApp\src\app\components\nav-bar\nav-bar.component.ts" />
+        <None Include="ClientApp\src\app\models\book.ts" />
+        <None Include="ClientApp\src\app\services\book.service.ts" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers" />
       <Folder Include="Migrations" />
     </ItemGroup>
 

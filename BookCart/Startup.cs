@@ -1,3 +1,5 @@
+using BookCart.DataAccess;
+using BookCart.Interfaces;
 using BookCart.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,7 +26,8 @@ namespace BookCart
         {
             services.AddDbContext<BookDBContext>(options => options.UseSqlServer(
                 Configuration["ConnectionStrings:DefaultConnection"]));
-            
+
+            services.AddTransient<IBookService, BookDataAccessLayer>();
             
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
