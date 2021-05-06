@@ -25,12 +25,30 @@
     <ItemGroup>
         <!-- Don't publish the SPA source files, but do show them in the project files list -->
         <Content Remove="$(SpaRoot)**" />
+        <Content Include="ClientApp\src\app\app.component.scss" />
+        <Content Include="ClientApp\src\app\components\nav-bar\nav-bar.component.html" />
+        <Content Include="ClientApp\src\app\components\nav-bar\nav-bar.component.scss" />
+        <Content Include="ClientApp\src\app\components\nav-bar\_navbar-theme.scss" />
+        <Content Include="ClientApp\src\assets\custom-themes\deeppurple-amber.scss" />
+        <Content Include="ClientApp\src\assets\custom-themes\indigo-pink.scss" />
+        <Content Include="ClientApp\src\assets\custom-themes\pink-bluegrey.scss" />
+        <Content Include="ClientApp\src\assets\custom-themes\purple-green.scss" />
+        <Content Include="ClientApp\src\main.scss" />
+        <Content Include="ClientApp\src\styles.css" />
+        <Content Include="ClientApp\src\styles.scss" />
+        <Content Include="ClientApp\src\_app-theme.scss" />
+        <Content Include="ClientApp\styles.css" />
+        <Content Include="ClientApp\styles.scss" />
+        <Content Include="ClientApp\tools\build-themes.sh" />
         <None Remove="$(SpaRoot)**" />
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+        <None Include="ClientApp\src\app\app-routing.module.ts" />
+        <None Include="ClientApp\src\app\components\nav-bar\nav-bar.component.ts" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="Controllers" />
+      <Folder Include="Migrations" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

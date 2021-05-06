@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookCart.Migrations
 {
     [DbContext(typeof(BookDBContext))]
-    [Migration("20210501021611_InitialCreate")]
+    [Migration("20210505232525_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

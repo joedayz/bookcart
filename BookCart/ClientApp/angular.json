@@ -22,8 +22,30 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": ["src/assets"],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css"
+              "src/styles.scss",
+              {
+                "input": "src/main.scss"
+              },
+              {
+                "input": "src/assets/pink-bluegrey.css",
+                "lazy": true,
+                "bundleName": "pink-bluegrey"
+              },
+              {
+                "input": "src/assets/deeppurple-amber.css",
+                "lazy": true,
+                "bundleName": "deeppurple-amber"
+              },
+              {
+                "input": "src/assets/indigo-pink.css",
+                "lazy": true,
+                "bundleName": "indigo-pink"
+              },
+              {
+                "input": "src/assets/purple-green.css",
+                "lazy": true,
+                "bundleName": "purple-green"
+              }
             ],
             "scripts": []
           },
