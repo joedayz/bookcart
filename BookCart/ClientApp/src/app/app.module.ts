@@ -10,13 +10,15 @@ import {NavBarComponent} from "./components/nav-bar/nav-bar.component";
 import {NgMaterialModule} from './ng-material/ng-material.module';
 import {HomeComponent} from "./components/home/home.component";
 import {BookFilterComponent} from "./components/book-filter/book-filter.component";
+import {BookCardComponent} from "./components/book-card/book-card.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
     HomeComponent,
-    BookFilterComponent
+    BookFilterComponent,
+    BookCardComponent
   ],
   imports: [
     BrowserModule,
