@@ -4,7 +4,9 @@ import { NgModule } from "@angular/core";
 
 
 
-const appRoutes: Routes = [];
+const appRoutes: Routes = [
+
+];
 
 
 @NgModule({
