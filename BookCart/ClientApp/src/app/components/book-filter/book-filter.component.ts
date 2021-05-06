@@ -1,5 +1,8 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {BookService} from "../../services/book.service";
+import {EMPTY, Observable} from "rxjs";
+import {Categories} from "../../models/categorites";
+import {catchError} from "rxjs/operators";
 
 
 @Component({
@@ -12,20 +15,22 @@ export class BookFilterComponent implements OnInit{
   @Input('category')
   category;
 
-  categoryList: [];
+  categories$: Observable<Categories[]>;
 
   constructor(private bookService: BookService) {
   }
 
   ngOnInit(): void {
-    this.bookService.getCategories().subscribe(
-      (categoryData: []) =>{
-        this.categoryList = categoryData;
-      }, error => {
-        console.log('Error fetching category list: ', error);
-      }
-    );
+    this.fetchCategories();
   }
 
 
+  fetchCategories() {
+    this.categories$ = this.bookService.categories$.pipe(
+      catchError(error=>{
+        console.log('Error fetching catgegory list: ', error);
+        return EMPTY;
+      })
+    );
+  }
 }

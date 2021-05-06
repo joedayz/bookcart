@@ -1,30 +1,27 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {map} from "rxjs/operators";
+import {map, shareReplay} from "rxjs/operators";
+import {Categories} from "../models/categorites";
+import {Book} from "../models/book";
 
 
 @Injectable({providedIn: 'root'})
 export class BookService {
 
-  baseURL: string;
+  baseURL = '/api/book/';
 
   constructor(private http: HttpClient) {
-    this.baseURL = "/api/book/";
   }
+
+  categories$ = this.http.get<Categories[]>(this.baseURL + 'GetCategoriesList').pipe(shareReplay(1));
+  books$ = this.getAllBooks().pipe(shareReplay(1));
+
 
   getAllBooks(){
-    return this.http.get(this.baseURL).pipe(
-      map(response => {
-        return response;
-      })
-    )
+    return this.http.get<Book[]>(this.baseURL);
   }
 
-  getCategories() {
-    return this.http.get(this.baseURL + "GetCategoriesList").pipe(
-      map(response=>{
-        return response;
-      })
-    );
+  getBookById(id: number) {
+    return this.books$.pipe(map(book => book.find(b => b.bookId === id)));
   }
 }

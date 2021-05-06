@@ -28,6 +28,8 @@
         <Content Include="ClientApp\src\app\app.component.scss" />
         <Content Include="ClientApp\src\app\components\book-card\book-card.component.html" />
         <Content Include="ClientApp\src\app\components\book-card\book-card.component.scss" />
+        <Content Include="ClientApp\src\app\components\book-details\book-details.component.html" />
+        <Content Include="ClientApp\src\app\components\book-details\book-details.component.scss" />
         <Content Include="ClientApp\src\app\components\book-filter\book-filter.component.html" />
         <Content Include="ClientApp\src\app\components\book-filter\book-filter.component.scss" />
         <Content Include="ClientApp\src\app\components\home\home.component.html" />
@@ -52,6 +54,7 @@
         <None Include="ClientApp\src\app\components\home\home.component.ts" />
         <None Include="ClientApp\src\app\components\nav-bar\nav-bar.component.ts" />
         <None Include="ClientApp\src\app\models\book.ts" />
+        <None Include="ClientApp\src\app\models\categorites.ts" />
         <None Include="ClientApp\src\app\services\book.service.ts" />
     </ItemGroup>
 

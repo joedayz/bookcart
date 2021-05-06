@@ -8,5 +8,6 @@ namespace BookCart.Interfaces
         List<Book> GetAllBooks();
 
         List<Categories> GetCategories();
+        Book GetBookData(int bookId);
     }
 }

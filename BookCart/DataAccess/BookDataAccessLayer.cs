@@ -33,5 +33,22 @@ namespace BookCart.DataAccess
             lstCategories = (from CategoriesList in _dbContext.Categories select CategoriesList).ToList();
             return lstCategories;
         }
+
+        public Book GetBookData(int bookId)
+        {
+            try
+            {
+                Book book = _dbContext.Book.FirstOrDefault(x => x.BookId == bookId);
+                if (book != null)
+                {
+                    _dbContext.Entry(book).State = EntityState.Detached;
+                }
+                return null;
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

@@ -11,6 +11,7 @@ import {NgMaterialModule} from './ng-material/ng-material.module';
 import {HomeComponent} from "./components/home/home.component";
 import {BookFilterComponent} from "./components/book-filter/book-filter.component";
 import {BookCardComponent} from "./components/book-card/book-card.component";
+import {BookDetailsComponent} from "./components/book-details/book-details.component";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {BookCardComponent} from "./components/book-card/book-card.component";
     NavBarComponent,
     HomeComponent,
     BookFilterComponent,
-    BookCardComponent
+    BookCardComponent,
+    BookDetailsComponent
   ],
   imports: [
     BrowserModule,

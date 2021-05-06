@@ -21,13 +21,26 @@ namespace BookCart.Controllers
         [Route("GetCategoriesList")]
         public async Task<IEnumerable<Categories>> CategoryDetails()
         {
-            return await Task.FromResult(_bookService.GetCategories());
+            return await Task.FromResult(_bookService.GetCategories()).ConfigureAwait(true);
+        }
+
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            Book book = _bookService.GetBookData(id);
+            if (book != null)
+            {
+                return Ok(book);
+            }
+
+            return NotFound();
         }
         
-        
+        [HttpGet]        
         public async Task<List<Book>> Get()
         {
-            return await Task.FromResult(_bookService.GetAllBooks());
+            return await Task.FromResult(_bookService.GetAllBooks()).ConfigureAwait(true);
         }
     }
 }
