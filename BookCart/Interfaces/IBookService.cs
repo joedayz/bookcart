@@ -9,5 +9,6 @@ namespace BookCart.Interfaces
 
         List<Categories> GetCategories();
         Book GetBookData(int bookId);
+        List<Book> GetSimilarBooks(int bookId);
     }
 }

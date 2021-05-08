@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using BookCart.Interfaces;
@@ -42,6 +43,7 @@ namespace BookCart.DataAccess
                 if (book != null)
                 {
                     _dbContext.Entry(book).State = EntityState.Detached;
+                    return book;
                 }
                 return null;
             }
@@ -49,6 +51,18 @@ namespace BookCart.DataAccess
             {
                 throw;
             }
+        }
+
+        public List<Book> GetSimilarBooks(int bookId)
+        {
+            List<Book> lstBook = new List<Book>();
+            Book book = GetBookData(bookId);
+
+            lstBook = _dbContext.Book.Where(x => x.Category == book.Category && x.BookId != book.BookId)
+                .OrderBy(u => Guid.NewGuid())
+                .Take(5)
+                .ToList();
+            return lstBook;
         }
     }
 }

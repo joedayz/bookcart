@@ -37,6 +37,8 @@
         <Content Include="ClientApp\src\app\components\nav-bar\nav-bar.component.html" />
         <Content Include="ClientApp\src\app\components\nav-bar\nav-bar.component.scss" />
         <Content Include="ClientApp\src\app\components\nav-bar\_navbar-theme.scss" />
+        <Content Include="ClientApp\src\app\components\similarbooks\similarbooks.component.html" />
+        <Content Include="ClientApp\src\app\components\similarbooks\similarbooks.component.scss" />
         <Content Include="ClientApp\src\assets\custom-themes\deeppurple-amber.scss" />
         <Content Include="ClientApp\src\assets\custom-themes\indigo-pink.scss" />
         <Content Include="ClientApp\src\assets\custom-themes\pink-bluegrey.scss" />

@@ -12,6 +12,7 @@ import {HomeComponent} from "./components/home/home.component";
 import {BookFilterComponent} from "./components/book-filter/book-filter.component";
 import {BookCardComponent} from "./components/book-card/book-card.component";
 import {BookDetailsComponent} from "./components/book-details/book-details.component";
+import {SimilarbooksComponent} from "./components/similarbooks/similarbooks.component";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {BookDetailsComponent} from "./components/book-details/book-details.compo
     HomeComponent,
     BookFilterComponent,
     BookCardComponent,
-    BookDetailsComponent
+    BookDetailsComponent,
+    SimilarbooksComponent
   ],
   imports: [
     BrowserModule,

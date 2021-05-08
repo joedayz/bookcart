@@ -24,6 +24,15 @@ namespace BookCart.Controllers
             return await Task.FromResult(_bookService.GetCategories()).ConfigureAwait(true);
         }
 
+        [HttpGet]  
+        [Route("GetSimilarBooks/{bookId}")]
+        public async Task<List<Book>> SimilarBooks(int bookId)
+        {
+            return await Task.FromResult(_bookService.GetSimilarBooks(bookId)).ConfigureAwait(true);
+        }
+
+        
+        
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
