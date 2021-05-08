@@ -1,5 +1,11 @@
 
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {User} from "../../models/user";
+import {Router} from "@angular/router";
+import {SubscriptionService} from "../../services/subscription.service";
+import {Observable} from "rxjs";
+import {UserService} from "../../services/user.service";
+import {AuthenticationService} from "../../services/authentication.service";
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,8 +13,36 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav-bar.component.scss']
 })
 
-export class NavBarComponent implements OnInit {
-  constructor() { }
+export class NavBarComponent implements OnInit, OnDestroy {
 
-  ngOnInit() { }
+  userData = new User();
+  userDataSubscription: any;
+  wishListCount$: Observable<number>;
+  cartItemCount$: Observable<number>;
+
+  constructor(private router: Router,
+              private authService: AuthenticationService,
+              private userService: UserService,
+              private subscriptionService: SubscriptionService) { }
+
+  ngOnInit() {
+    this.userDataSubscription = this.subscriptionService.userData.asObservable().subscribe(data=>{
+      this.userData = data;
+    });
+
+    this.cartItemCount$ = this.subscriptionService.cartItemcount$;
+    this.wishListCount$ = this.subscriptionService.wishlistItemcount$;
+
+  }
+
+  ngOnDestroy(): void {
+    if(this.userDataSubscription){
+      this.userDataSubscription.unsubscribe();
+    }
+  }
+
+  logout(){
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
 }

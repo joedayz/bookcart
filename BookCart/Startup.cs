@@ -1,6 +1,9 @@
+using System;
+using System.Text;
 using BookCart.DataAccess;
 using BookCart.Interfaces;
 using BookCart.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -9,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BookCart
 {
@@ -28,6 +32,35 @@ namespace BookCart
                 Configuration["ConnectionStrings:DefaultConnection"]));
 
             services.AddTransient<IBookService, BookDataAccessLayer>();
+            services.AddTransient<IUserService, UserDataAccessLayer>();
+            
+            
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.RequireHttpsMetadata = false;
+                    options.SaveToken = true;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = Configuration["Jwt:Issuer"],
+                        ValidAudience = Configuration["Jwt:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:SecretKey"])),
+                        ClockSkew = TimeSpan.Zero // Override the default clock skew of 5 mins
+                    };
+
+                    services.AddCors();
+                });
+
+            services.AddAuthorization(config =>
+            {
+                config.AddPolicy(UserRoles.Admin, Policies.AdminPolicy());
+                config.AddPolicy(UserRoles.User, Policies.UserPolicy());
+            });
+
             
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
@@ -57,6 +90,9 @@ namespace BookCart
 
             app.UseRouting();
 
+            app.UseAuthentication();
+            app.UseAuthorization();
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

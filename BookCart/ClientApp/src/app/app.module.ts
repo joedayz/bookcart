@@ -14,6 +14,7 @@ import {BookCardComponent} from "./components/book-card/book-card.component";
 import {BookDetailsComponent} from "./components/book-details/book-details.component";
 import {SimilarbooksComponent} from "./components/similarbooks/similarbooks.component";
 import {AddtowishlistComponent} from "./components/addtowishlist/addtowishlist.component";
+import {LoginComponent} from "./components/login/login.component";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {AddtowishlistComponent} from "./components/addtowishlist/addtowishlist.c
     BookCardComponent,
     BookDetailsComponent,
     SimilarbooksComponent,
-    AddtowishlistComponent
+    AddtowishlistComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
