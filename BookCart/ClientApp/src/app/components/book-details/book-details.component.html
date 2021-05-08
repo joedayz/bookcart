@@ -31,7 +31,7 @@
         </tr>
       </table>
       <!-- TODO 1: AGREGAR A CARRITO-->
-      <!-- TODO 2: AGREGAR A WHITELIST-->
+      <app-addtowishlist *ngIf="(userData$ | async).isLoggedIn" [bookId]="bookId" [showButton]="true"></app-addtowishlist>
     </div>
   </div>
 </div>

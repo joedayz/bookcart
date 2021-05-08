@@ -4,6 +4,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Book} from "../../models/book";
 import {EMPTY, Observable} from "rxjs";
 import {catchError} from "rxjs/operators";
+import {User} from "../../models/user";
+import {SubscriptionService} from "../../services/subscription.service";
 
 
 @Component({
@@ -15,8 +17,11 @@ export class BookDetailsComponent implements OnInit{
 
   BookDetails$: Observable<Book>;
   bookId;
+  userData$: Observable<User>;
 
-  constructor(private bookService: BookService, private route: ActivatedRoute) {
+  constructor(private bookService: BookService,
+              private route: ActivatedRoute,
+              private subscriptionService: SubscriptionService) {
     this.bookId = this.route.snapshot.paramMap.get('id');
   }
 
@@ -29,6 +34,7 @@ export class BookDetailsComponent implements OnInit{
         }
       )
 
+      this.userData$ = this.subscriptionService.userData;
 
   }
 

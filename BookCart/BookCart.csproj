@@ -26,6 +26,8 @@
         <!-- Don't publish the SPA source files, but do show them in the project files list -->
         <Content Remove="$(SpaRoot)**" />
         <Content Include="ClientApp\src\app\app.component.scss" />
+        <Content Include="ClientApp\src\app\components\addtowishlist\addtowishlist.component.html" />
+        <Content Include="ClientApp\src\app\components\addtowishlist\addtowishlist.component.scss" />
         <Content Include="ClientApp\src\app\components\book-card\book-card.component.html" />
         <Content Include="ClientApp\src\app\components\book-card\book-card.component.scss" />
         <Content Include="ClientApp\src\app\components\book-details\book-details.component.html" />
@@ -57,10 +59,15 @@
         <None Include="ClientApp\src\app\components\nav-bar\nav-bar.component.ts" />
         <None Include="ClientApp\src\app\models\book.ts" />
         <None Include="ClientApp\src\app\models\categorites.ts" />
+        <None Include="ClientApp\src\app\models\user.ts" />
         <None Include="ClientApp\src\app\services\book.service.ts" />
+        <None Include="ClientApp\src\app\services\snackbar.service.ts" />
+        <None Include="ClientApp\src\app\services\subscription.service.ts" />
+        <None Include="ClientApp\src\app\services\wishlist.service.ts" />
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="ClientApp\src\app\components\wishlist" />
       <Folder Include="Migrations" />
     </ItemGroup>
 
