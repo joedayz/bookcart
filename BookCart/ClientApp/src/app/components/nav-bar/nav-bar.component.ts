@@ -6,6 +6,7 @@ import {SubscriptionService} from "../../services/subscription.service";
 import {Observable} from "rxjs";
 import {UserService} from "../../services/user.service";
 import {AuthenticationService} from "../../services/authentication.service";
+import {UserType} from "../../models/usertype";
 
 @Component({
   selector: 'app-nav-bar',
@@ -17,6 +18,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   userData = new User();
   userDataSubscription: any;
+  userType = UserType;
   wishListCount$: Observable<number>;
   cartItemCount$: Observable<number>;
 

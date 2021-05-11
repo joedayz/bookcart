@@ -64,6 +64,7 @@
         <None Include="ClientApp\src\app\models\book.ts" />
         <None Include="ClientApp\src\app\models\categorites.ts" />
         <None Include="ClientApp\src\app\models\user.ts" />
+        <None Include="ClientApp\src\app\models\usertype.ts" />
         <None Include="ClientApp\src\app\services\authentication.service.ts" />
         <None Include="ClientApp\src\app\services\book.service.ts" />
         <None Include="ClientApp\src\app\services\snackbar.service.ts" />
