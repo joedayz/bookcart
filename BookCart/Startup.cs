@@ -33,7 +33,7 @@ namespace BookCart
 
             services.AddTransient<IBookService, BookDataAccessLayer>();
             services.AddTransient<IUserService, UserDataAccessLayer>();
-            
+            services.AddTransient<ICartService, CartDataAccessLayer>();
             
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>

@@ -15,6 +15,8 @@ import {BookDetailsComponent} from "./components/book-details/book-details.compo
 import {SimilarbooksComponent} from "./components/similarbooks/similarbooks.component";
 import {AddtowishlistComponent} from "./components/addtowishlist/addtowishlist.component";
 import {LoginComponent} from "./components/login/login.component";
+import {AddtocartComponent} from "./components/addtocart/addtocart.component";
+import {ShoppingcartComponent} from "./components/shoppingcart/shoppingcart.component";
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import {LoginComponent} from "./components/login/login.component";
     BookDetailsComponent,
     SimilarbooksComponent,
     AddtowishlistComponent,
-    LoginComponent
+    LoginComponent,
+    AddtocartComponent,
+    ShoppingcartComponent
   ],
   imports: [
     BrowserModule,

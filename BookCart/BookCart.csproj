@@ -27,6 +27,8 @@
         <!-- Don't publish the SPA source files, but do show them in the project files list -->
         <Content Remove="$(SpaRoot)**" />
         <Content Include="ClientApp\src\app\app.component.scss" />
+        <Content Include="ClientApp\src\app\components\addtocart\addtocart.component.html" />
+        <Content Include="ClientApp\src\app\components\addtocart\addtocart.component.scss" />
         <Content Include="ClientApp\src\app\components\addtowishlist\addtowishlist.component.html" />
         <Content Include="ClientApp\src\app\components\addtowishlist\addtowishlist.component.scss" />
         <Content Include="ClientApp\src\app\components\book-card\book-card.component.html" />
@@ -42,6 +44,8 @@
         <Content Include="ClientApp\src\app\components\nav-bar\nav-bar.component.html" />
         <Content Include="ClientApp\src\app\components\nav-bar\nav-bar.component.scss" />
         <Content Include="ClientApp\src\app\components\nav-bar\_navbar-theme.scss" />
+        <Content Include="ClientApp\src\app\components\shoppingcart\shoppingcart.component.html" />
+        <Content Include="ClientApp\src\app\components\shoppingcart\shoppingcart.component.scss" />
         <Content Include="ClientApp\src\app\components\similarbooks\similarbooks.component.html" />
         <Content Include="ClientApp\src\app\components\similarbooks\similarbooks.component.scss" />
         <Content Include="ClientApp\src\assets\custom-themes\deeppurple-amber.scss" />
@@ -63,10 +67,12 @@
         <None Include="ClientApp\src\app\components\nav-bar\nav-bar.component.ts" />
         <None Include="ClientApp\src\app\models\book.ts" />
         <None Include="ClientApp\src\app\models\categorites.ts" />
+        <None Include="ClientApp\src\app\models\shoppingcart.ts" />
         <None Include="ClientApp\src\app\models\user.ts" />
         <None Include="ClientApp\src\app\models\usertype.ts" />
         <None Include="ClientApp\src\app\services\authentication.service.ts" />
         <None Include="ClientApp\src\app\services\book.service.ts" />
+        <None Include="ClientApp\src\app\services\cart.service.ts" />
         <None Include="ClientApp\src\app\services\snackbar.service.ts" />
         <None Include="ClientApp\src\app\services\subscription.service.ts" />
         <None Include="ClientApp\src\app\services\user.service.ts" />

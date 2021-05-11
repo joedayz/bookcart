@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BookCart.Dto;
 using BookCart.Interfaces;
 using BookCart.Models;
 using Microsoft.EntityFrameworkCore;
@@ -63,6 +64,32 @@ namespace BookCart.DataAccess
                 .Take(5)
                 .ToList();
             return lstBook;
+        }
+
+        public List<CartItemDto> GetBooksAvailableInCart(string cartid)
+        {
+            try
+            {
+                List<CartItemDto> cartItemList = new List<CartItemDto>();
+                List<CartItems> cartItems = _dbContext.CartItems.Where(x => x.CartId == cartid).ToList();
+
+                foreach (CartItems item in cartItems)
+                {
+                    Book book = GetBookData(item.ProductId);
+                    CartItemDto objCartItem = new CartItemDto
+                    {
+                        Book = book,
+                        Quantity = item.Quantity
+                    };
+                    cartItemList.Add(objCartItem);
+                }
+
+                return cartItemList;
+            }
+            catch 
+            {
+                throw;
+            }
         }
     }
 }

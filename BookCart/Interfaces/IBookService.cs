@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BookCart.Dto;
 using BookCart.Models;
 
 namespace BookCart.Interfaces
@@ -10,5 +11,6 @@ namespace BookCart.Interfaces
         List<Categories> GetCategories();
         Book GetBookData(int bookId);
         List<Book> GetSimilarBooks(int bookId);
+        List<CartItemDto> GetBooksAvailableInCart(string cartid);
     }
 }
