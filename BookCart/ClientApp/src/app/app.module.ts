@@ -17,6 +17,7 @@ import {AddtowishlistComponent} from "./components/addtowishlist/addtowishlist.c
 import {LoginComponent} from "./components/login/login.component";
 import {AddtocartComponent} from "./components/addtocart/addtocart.component";
 import {ShoppingcartComponent} from "./components/shoppingcart/shoppingcart.component";
+import {PageNotFoundComponent} from "./components/page-not-found/page-not-found.component";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,9 @@ import {ShoppingcartComponent} from "./components/shoppingcart/shoppingcart.comp
     AddtowishlistComponent,
     LoginComponent,
     AddtocartComponent,
-    ShoppingcartComponent
+    ShoppingcartComponent,
+    PageNotFoundComponent,
+
   ],
   imports: [
     BrowserModule,

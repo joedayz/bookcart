@@ -31,6 +31,12 @@
         <Content Include="ClientApp\src\app\components\addtocart\addtocart.component.scss" />
         <Content Include="ClientApp\src\app\components\addtowishlist\addtowishlist.component.html" />
         <Content Include="ClientApp\src\app\components\addtowishlist\addtowishlist.component.scss" />
+        <Content Include="ClientApp\src\app\components\admin\book-form\book-form.component.html" />
+        <Content Include="ClientApp\src\app\components\admin\book-form\book-form.component.scss" />
+        <Content Include="ClientApp\src\app\components\admin\delete-form\delete-book.component.html" />
+        <Content Include="ClientApp\src\app\components\admin\delete-form\delete-book.component.scss" />
+        <Content Include="ClientApp\src\app\components\admin\manage-books\manage-books.component.html" />
+        <Content Include="ClientApp\src\app\components\admin\manage-books\manage-books.component.scss" />
         <Content Include="ClientApp\src\app\components\book-card\book-card.component.html" />
         <Content Include="ClientApp\src\app\components\book-card\book-card.component.scss" />
         <Content Include="ClientApp\src\app\components\book-details\book-details.component.html" />
@@ -44,6 +50,8 @@
         <Content Include="ClientApp\src\app\components\nav-bar\nav-bar.component.html" />
         <Content Include="ClientApp\src\app\components\nav-bar\nav-bar.component.scss" />
         <Content Include="ClientApp\src\app\components\nav-bar\_navbar-theme.scss" />
+        <Content Include="ClientApp\src\app\components\page-not-found\page-not-found.component.html" />
+        <Content Include="ClientApp\src\app\components\page-not-found\page-not-found.component.scss" />
         <Content Include="ClientApp\src\app\components\shoppingcart\shoppingcart.component.html" />
         <Content Include="ClientApp\src\app\components\shoppingcart\shoppingcart.component.scss" />
         <Content Include="ClientApp\src\app\components\similarbooks\similarbooks.component.html" />
@@ -61,10 +69,13 @@
         <Content Include="ClientApp\tools\build-themes.sh" />
         <None Remove="$(SpaRoot)**" />
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+        <None Include="ClientApp\src\app\admin\admin-routing.module.ts" />
+        <None Include="ClientApp\src\app\admin\admin.module.ts" />
         <None Include="ClientApp\src\app\app-routing.module.ts" />
         <None Include="ClientApp\src\app\components\home\home.component.ts" />
         <None Include="ClientApp\src\app\components\login\login.component.ts" />
         <None Include="ClientApp\src\app\components\nav-bar\nav-bar.component.ts" />
+        <None Include="ClientApp\src\app\guards\admin-auth.guard.ts" />
         <None Include="ClientApp\src\app\models\book.ts" />
         <None Include="ClientApp\src\app\models\categorites.ts" />
         <None Include="ClientApp\src\app\models\shoppingcart.ts" />

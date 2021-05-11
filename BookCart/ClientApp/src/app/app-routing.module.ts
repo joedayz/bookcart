@@ -5,6 +5,8 @@ import {HomeComponent} from "./components/home/home.component";
 import {BookDetailsComponent} from "./components/book-details/book-details.component";
 import {LoginComponent} from "./components/login/login.component";
 import {ShoppingcartComponent} from "./components/shoppingcart/shoppingcart.component";
+import {AdminAuthGuard} from "./guards/admin-auth.guard";
+import {PageNotFoundComponent} from "./components/page-not-found/page-not-found.component";
 
 
 
@@ -13,6 +15,13 @@ const appRoutes: Routes = [
   { path: 'books/details/:id', component: BookDetailsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'shopping-cart', component: ShoppingcartComponent },
+  {
+    path: 'admin/books',
+    loadChildren: () => import('./admin/admin.module').then(mod => mod.AdminModule),
+    canLoad: [AdminAuthGuard],
+    canActivate: [AdminAuthGuard]
+  },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 

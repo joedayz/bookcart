@@ -28,4 +28,16 @@ export class BookService {
   getSimilarBooks(bookId: number) {
     return this.http.get<Book[]>(this.baseURL + 'GetSimilarBooks/' + bookId);
   }
+
+  updateBookDetails(book) {
+    return this.http.put(this.baseURL, book);
+  }
+
+  addBook(book) {
+    return this.http.post(this.baseURL, book);
+  }
+
+  deleteBook(id: number) {
+    return this.http.delete(this.baseURL + id);
+  }
 }
