@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -18,6 +18,12 @@ import {LoginComponent} from "./components/login/login.component";
 import {AddtocartComponent} from "./components/addtocart/addtocart.component";
 import {ShoppingcartComponent} from "./components/shoppingcart/shoppingcart.component";
 import {PageNotFoundComponent} from "./components/page-not-found/page-not-found.component";
+import {HttpInterceptorService} from "./interceptors/http-interceptor-service";
+import {ErrorInterceptorService} from "./interceptors/error-interceptor-service";
+import {CheckoutComponent} from "./components/checkout/checkout.component";
+import {MyOrdersComponent} from "./components/my-orders/my-orders.component";
+import {UserRegistrationComponent} from "./components/user-registration/user-registration.component";
+import {WishlistComponent} from "./components/wishlist/wishlist.component";
 
 @NgModule({
   declarations: [
@@ -33,7 +39,10 @@ import {PageNotFoundComponent} from "./components/page-not-found/page-not-found.
     AddtocartComponent,
     ShoppingcartComponent,
     PageNotFoundComponent,
-
+    CheckoutComponent,
+    MyOrdersComponent,
+    UserRegistrationComponent,
+    WishlistComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +53,10 @@ import {PageNotFoundComponent} from "./components/page-not-found/page-not-found.
     AppRoutingModule,
     NgMaterialModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

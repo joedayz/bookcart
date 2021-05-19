@@ -91,5 +91,67 @@ namespace BookCart.DataAccess
                 throw;
             }
         }
+        
+        public string DeleteBook(int bookId)
+        {
+            try
+            {
+                Book book = _dbContext.Book.Find(bookId);
+                _dbContext.Book.Remove(book);
+                _dbContext.SaveChanges();
+
+                return (book.CoverFileName);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+   
+        public int UpdateBook(Book book)
+        {
+            try
+            {
+                Book oldBookData = GetBookData(book.BookId);
+
+                if (oldBookData.CoverFileName != null)
+                {
+                    if (book.CoverFileName == null)
+                    {
+                        book.CoverFileName = oldBookData.CoverFileName;
+                    }
+                }
+
+                _dbContext.Entry(book).State = EntityState.Modified;
+                _dbContext.SaveChanges();
+
+                return 1;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public int AddBook(Book book)
+        {
+            try
+            {
+                _dbContext.Book.Add(book);
+                _dbContext.SaveChanges();
+
+                return 1;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public List<Book> GetBooksAvailableInWishlist(string wishlistid)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

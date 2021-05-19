@@ -22,6 +22,12 @@ namespace BookCart.Models
         public virtual DbSet<CustomerOrders> CustomerOrders { get; set; }
         public virtual DbSet<UserMaster> UserMaster { get; set; }
         public virtual DbSet<UserType> UserType { get; set; }
+        public virtual DbSet<Wishlist> Wishlist { get; set; }
+        public virtual DbSet<WishlistItems> WishlistItems { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -155,6 +161,28 @@ namespace BookCart.Models
                 entity.Property(e => e.UserTypeName)
                     .IsRequired()
                     .HasMaxLength(20)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Wishlist>(entity =>
+            {
+                entity.Property(e => e.WishlistId)
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DateCreated).HasColumnType("datetime");
+
+                entity.Property(e => e.UserId).HasColumnName("UserID");
+            });
+
+            modelBuilder.Entity<WishlistItems>(entity =>
+            {
+                entity.HasKey(e => e.WishlistItemId)
+                    .HasName("PK__Wishlist__171E21A16A5148A4");
+
+                entity.Property(e => e.WishlistId)
+                    .IsRequired()
+                    .HasMaxLength(36)
                     .IsUnicode(false);
             });
 

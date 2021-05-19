@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Reflection;
 using System.Text;
 using BookCart.DataAccess;
 using BookCart.Interfaces;
@@ -13,6 +15,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 
 namespace BookCart
 {
@@ -31,9 +35,46 @@ namespace BookCart
             services.AddDbContext<BookDBContext>(options => options.UseSqlServer(
                 Configuration["ConnectionStrings:DefaultConnection"]));
 
+          
             services.AddTransient<IBookService, BookDataAccessLayer>();
-            services.AddTransient<IUserService, UserDataAccessLayer>();
             services.AddTransient<ICartService, CartDataAccessLayer>();
+            services.AddTransient<IOrderService, OrderDataAccessLayer>();
+            services.AddTransient<IUserService, UserDataAccessLayer>();
+            services.AddTransient<IWishlistService, WishlistDataAccessLayer>();
+            
+            // services.AddSwaggerGen(c =>
+            // {
+            //     c.SwaggerDoc("v1", new OpenApiInfo
+            //     {
+            //         Title = "BookCart API",
+            //         Version = "v1",
+            //         Contact = new OpenApiContact
+            //         {
+            //             Name = "Materia Gris",
+            //             Url = new Uri("http://materiagris.pe/"),
+            //         },
+            //         License = new OpenApiLicense
+            //         {
+            //             Name = "MIT Licenese",
+            //             Url = new Uri("https://github.com/joedayz/BookCart/blob/master/LICENSE"),
+            //         }
+            //     });
+            //
+            //     c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+            //     {
+            //         Description = "Standard JWT Authorization header. Example: \"bearer {token}\"",
+            //         Name = "Authorization",
+            //         In = ParameterLocation.Header,
+            //         Type = SecuritySchemeType.ApiKey
+            //     });
+            //
+            //     c.OperationFilter<SecurityRequirementsOperationFilter>();
+            //
+            //     // Set the comments path for the Swagger JSON and UI.
+            //     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            //     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            //     c.IncludeXmlComments(xmlPath);
+            // });
             
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -88,6 +129,11 @@ namespace BookCart
                 app.UseSpaStaticFiles();
             }
 
+            // app.UseSwagger();
+            // app.UseSwaggerUI(c =>
+            // {
+            //     c.SwaggerEndpoint("/swagger/v1/swagger.json", "BookCart API");
+            // });
             app.UseRouting();
 
             app.UseAuthentication();
