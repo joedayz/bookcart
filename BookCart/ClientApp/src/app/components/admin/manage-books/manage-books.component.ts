@@ -1,15 +1,14 @@
-import {Component, OnDestroy, OnInit, ViewChild} from "@angular/core";
-import {MatTableDataSource} from "@angular/material/table";
-import {Book} from "../../../models/book";
-import {MatPaginator} from "@angular/material/paginator";
-import {MatSort} from "@angular/material/sort";
-import {Subject} from "rxjs";
-import {BookService} from "../../../services/book.service";
-import {MatDialog} from "@angular/material/dialog";
-import {SnackbarService} from "../../../services/snackbar.service";
-import {takeUntil} from "rxjs/operators";
-import {DeleteBookComponent} from "../delete-form/delete-book.component";
-
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { Book } from 'src/app/models/book';
+import { BookService } from 'src/app/services/book.service';
+import { SnackbarService } from 'src/app/services/snackbar.service';
+import { DeleteBookComponent } from '../delete-book/delete-book.component';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-manage-books',
@@ -26,14 +25,13 @@ export class ManageBooksComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   private unsubscribe$ = new Subject<void>();
-
   constructor(
     private bookService: BookService,
     public dialog: MatDialog,
     private snackBarService: SnackbarService) {
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.getAllBookData();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -48,12 +46,6 @@ export class ManageBooksComponent implements OnInit, OnDestroy {
         console.log('Error ocurred while fetching book details : ', error);
       });
   }
-
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
-
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -77,5 +69,10 @@ export class ManageBooksComponent implements OnInit, OnDestroy {
           this.snackBarService.showSnackBar('Error occurred!! Try again');
         }
       });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

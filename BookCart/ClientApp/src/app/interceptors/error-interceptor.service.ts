@@ -1,16 +1,14 @@
-import {Injectable} from "@angular/core";
-import {Router} from "@angular/router";
-import {AuthenticationService} from "../services/authentication.service";
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
-import {Observable, throwError} from "rxjs";
-import {catchError} from "rxjs/operators";
-
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ErrorInterceptorService implements HttpInterceptor {
-
+export class ErrorInterceptorService {
 
   constructor(
     private authService: AuthenticationService,
@@ -31,8 +29,4 @@ export class ErrorInterceptorService implements HttpInterceptor {
       return throwError(error);
     }));
   }
-
-
-
-
 }

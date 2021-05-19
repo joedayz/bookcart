@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 cd ..
 DEST_PATH=src/assets
 INPUT_PATH=$DEST_PATH/custom-themes/

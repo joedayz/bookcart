@@ -24,7 +24,6 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['orderId', 'orderedOn', 'orderTotal'];
   dataSource = new MatTableDataSource<Order>();
   expandedElement: null;
-  // @ts-ignore
   @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
 
     /*

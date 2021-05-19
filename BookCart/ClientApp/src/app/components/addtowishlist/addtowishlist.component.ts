@@ -1,16 +1,15 @@
-import {Component, Input, OnChanges} from "@angular/core";
-import {Book} from "../../models/book";
-import {WishlistService} from "../../services/wishlist.service";
-import {SnackbarService} from "../../services/snackbar.service";
-import {SubscriptionService} from "../../services/subscription.service";
-
+import { Component, Input, OnChanges } from '@angular/core';
+import { WishlistService } from 'src/app/services/wishlist.service';
+import { SubscriptionService } from 'src/app/services/subscription.service';
+import { SnackbarService } from 'src/app/services/snackbar.service';
+import { Book } from 'src/app/models/book';
 
 @Component({
   selector: 'app-addtowishlist',
   templateUrl: './addtowishlist.component.html',
   styleUrls: ['./addtowishlist.component.scss']
 })
-export class AddtowishlistComponent implements OnChanges{
+export class AddtowishlistComponent implements OnChanges {
 
   @Input()
   bookId: number;
@@ -21,27 +20,39 @@ export class AddtowishlistComponent implements OnChanges{
   userId;
   toggle: boolean;
   buttonText: string;
-  public wishlistitems : Book[];
+  public wishlistItems: Book[];
 
-  constructor(private wishlistService: WishlistService,
-              private subscriptionService: SubscriptionService,
-              private snackBarService: SnackbarService) {
+  constructor(
+    private wishlistService: WishlistService,
+    private subscriptionService: SubscriptionService,
+    private snackBarService: SnackbarService) {
     this.userId = localStorage.getItem('userId');
   }
 
-
-  ngOnChanges(): void {
-      this.subscriptionService.wishlistItem$.pipe().subscribe(
-        (bookData) => {
-          this.setFavourite(bookData);
-          this.setButtonText();
-        }
-      );
+  ngOnChanges() {
+    this.subscriptionService.wishlistItem$.pipe().subscribe(
+      (bookData: Book[]) => {
+        this.setFavourite(bookData);
+        this.setButtonText();
+      });
   }
 
   setFavourite(bookData: Book[]) {
     const favBook = bookData.find(f => f.bookId === this.bookId);
-    this.toggle = !!favBook;
+
+    if (favBook) {
+      this.toggle = true;
+    } else {
+      this.toggle = false;
+    }
+  }
+
+  setButtonText() {
+    if (this.toggle) {
+      this.buttonText = 'Remove from Wishlist';
+    } else {
+      this.buttonText = 'Add to Wishlist';
+    }
   }
 
   toggleValue() {
@@ -56,19 +67,7 @@ export class AddtowishlistComponent implements OnChanges{
           this.snackBarService.showSnackBar('Item removed from your Wishlist');
         }
       }, error => {
-        console.log('Error ocurred while adding to wishlist: ', error);
-      }
-    );
-
+        console.log('Error ocurred while adding to wishlist : ', error);
+      });
   }
-
-  setButtonText() {
-    if(this.toggle){
-      this.buttonText = 'Remove from Wishlist';
-    }else{
-      this.buttonText = 'Add to Wishlist';
-    }
-  }
-
-
 }

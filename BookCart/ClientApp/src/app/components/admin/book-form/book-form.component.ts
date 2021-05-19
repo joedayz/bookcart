@@ -1,11 +1,10 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Book} from "../../../models/book";
-import {Subject} from "rxjs";
-import {BookService} from "../../../services/book.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {takeUntil} from "rxjs/operators";
-
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Book } from 'src/app/models/book';
+import { BookService } from 'src/app/services/book.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-book-form',
@@ -24,10 +23,11 @@ export class BookFormComponent implements OnInit, OnDestroy {
   categoryList: [];
   private unsubscribe$ = new Subject<void>();
 
-  constructor(private bookService: BookService,
-              private route: ActivatedRoute,
-              private fb: FormBuilder,
-              private router: Router) {
+  constructor(
+    private bookService: BookService,
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private router: Router) {
 
     this.bookForm = this.fb.group({
       bookId: 0,
@@ -36,7 +36,6 @@ export class BookFormComponent implements OnInit, OnDestroy {
       category: ['', Validators.required],
       price: ['', [Validators.required, Validators.min(0)]],
     });
-
   }
 
   get title() {
@@ -55,8 +54,7 @@ export class BookFormComponent implements OnInit, OnDestroy {
     return this.bookForm.get('price');
   }
 
-
-  ngOnInit(): void {
+  ngOnInit() {
     this.bookService.categories$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(
@@ -88,27 +86,6 @@ export class BookFormComponent implements OnInit, OnDestroy {
         });
   }
 
-  setBookFormData(bookFormData) {
-    this.bookForm.setValue({
-      bookId: bookFormData.bookId,
-      title: bookFormData.title,
-      author: bookFormData.author,
-      category: bookFormData.category,
-      price: bookFormData.price
-    });
-
-    this.coverImagePath = '/Upload/' +  bookFormData.coverFileName;
-
-  }
-
-
-
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
-
-
   onFormSubmit() {
     if (!this.bookForm.valid) {
       return;
@@ -126,7 +103,6 @@ export class BookFormComponent implements OnInit, OnDestroy {
       this.saveBookDetails();
     }
   }
-
 
   editBookDetails() {
     this.bookService.updateBookDetails(this.formData)
@@ -155,6 +131,17 @@ export class BookFormComponent implements OnInit, OnDestroy {
     this.router.navigate(['/admin/books']);
   }
 
+  setBookFormData(bookFormData) {
+    this.bookForm.setValue({
+      bookId: bookFormData.bookId,
+      title: bookFormData.title,
+      author: bookFormData.author,
+      category: bookFormData.category,
+      price: bookFormData.price
+    });
+    this.coverImagePath = '/Upload/' + bookFormData.coverFileName;
+  }
+
   uploadImage(event) {
     this.files = event.target.files;
     const reader = new FileReader();
@@ -162,5 +149,10 @@ export class BookFormComponent implements OnInit, OnDestroy {
     reader.onload = (myevent: ProgressEvent) => {
       this.coverImagePath = (myevent.target as FileReader).result;
     };
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

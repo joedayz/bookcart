@@ -1,13 +1,12 @@
-import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
-import {map} from "rxjs/operators";
-import {ShoppingCart} from "../models/shoppingcart";
-
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { ShoppingCart } from '../models/shoppingcart';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CartService{
+export class CartService {
 
   cartItemCount = 0;
   baseURL: string;

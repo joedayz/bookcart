@@ -1,19 +1,17 @@
-import { Routes, RouterModule } from "@angular/router";
-import { CommonModule } from "@angular/common";
-import { NgModule } from "@angular/core";
-import {HomeComponent} from "./components/home/home.component";
-import {BookDetailsComponent} from "./components/book-details/book-details.component";
-import {LoginComponent} from "./components/login/login.component";
-import {ShoppingcartComponent} from "./components/shoppingcart/shoppingcart.component";
-import {AdminAuthGuard} from "./guards/admin-auth.guard";
-import {PageNotFoundComponent} from "./components/page-not-found/page-not-found.component";
-import {CheckoutComponent} from "./components/checkout/checkout.component";
-import {AuthGuard} from "./guards/auth.guard";
-import {MyOrdersComponent} from "./components/my-orders/my-orders.component";
-import {UserRegistrationComponent} from "./components/user-registration/user-registration.component";
-import {WishlistComponent} from "./components/wishlist/wishlist.component";
-
-
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { UserRegistrationComponent } from './components/user-registration/user-registration.component';
+import { AuthGuard } from './guards/auth.guard';
+import { BookDetailsComponent } from './components/book-details/book-details.component';
+import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { MyOrdersComponent } from './components/my-orders/my-orders.component';
+import { AdminAuthGuard } from './guards/admin-auth.guard';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },

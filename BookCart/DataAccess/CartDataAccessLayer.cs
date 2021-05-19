@@ -1,9 +1,9 @@
+﻿using BookCart.Interfaces;
+using BookCart.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using BookCart.Interfaces;
-using BookCart.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace BookCart.DataAccess
 {
@@ -16,13 +16,13 @@ namespace BookCart.DataAccess
             _dbContext = dbContext;
         }
 
-
         public void AddBookToCart(int userId, int bookId)
         {
             string cartId = GetCartId(userId);
             int quantity = 1;
-            
+
             CartItems existingCartItem = _dbContext.CartItems.FirstOrDefault(x => x.ProductId == bookId && x.CartId == cartId);
+
             if (existingCartItem != null)
             {
                 existingCartItem.Quantity += 1;
@@ -40,7 +40,50 @@ namespace BookCart.DataAccess
                 _dbContext.CartItems.Add(cartItems);
                 _dbContext.SaveChanges();
             }
-            
+        }
+
+        public string GetCartId(int userId)
+        {
+            try
+            {
+                Cart cart = _dbContext.Cart.FirstOrDefault(x => x.UserId == userId);
+
+                if (cart != null)
+                {
+                    return cart.CartId;
+                }
+                else
+                {
+                    return CreateCart(userId);
+                }
+
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        string CreateCart(int userId)
+        {
+            try
+            {
+                Cart shoppingCart = new Cart
+                {
+                    CartId = Guid.NewGuid().ToString(),
+                    UserId = userId,
+                    DateCreated = DateTime.Now.Date
+                };
+
+                _dbContext.Cart.Add(shoppingCart);
+                _dbContext.SaveChanges();
+
+                return shoppingCart.CartId;
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         public void RemoveCartItem(int userId, int bookId)
@@ -100,13 +143,13 @@ namespace BookCart.DataAccess
                 {
                     string tempCartId = GetCartId(tempUserId);
                     string permCartId = GetCartId(permUserId);
-                    
+
                     List<CartItems> tempCartItems = _dbContext.CartItems.Where(x => x.CartId == tempCartId).ToList();
 
                     foreach (CartItems item in tempCartItems)
                     {
                         CartItems cartItem = _dbContext.CartItems.FirstOrDefault(x => x.ProductId == item.ProductId && x.CartId == permCartId);
-                        
+
                         if (cartItem != null)
                         {
                             cartItem.Quantity += item.Quantity;
@@ -134,13 +177,6 @@ namespace BookCart.DataAccess
             }
         }
 
-        private void DeleteCart(string cartId)
-        {
-            Cart cart = _dbContext.Cart.Find(cartId);
-            _dbContext.Cart.Remove(cart);
-            _dbContext.SaveChanges();
-        }
-
         public int ClearCart(int userId)
         {
             try
@@ -164,47 +200,11 @@ namespace BookCart.DataAccess
             }
         }
 
-        public string GetCartId(int userId)
+        void DeleteCart(string cartId)
         {
-            try
-            {
-                Cart cart = _dbContext.Cart.FirstOrDefault(x => x.UserId == userId);
-                if (cart != null)
-                {
-                    return cart.CartId;
-                }
-                else
-                {
-                    return CreateCart(userId);
-                }
-            }
-            catch 
-            {
-                
-                throw;
-            }
-        }
-
-        private string CreateCart(int userId)
-        {
-            try
-            {
-                Cart shoppingCart = new Cart
-                {
-                    CartId = Guid.NewGuid().ToString(),
-                    UserId = userId,
-                    DateCreated = DateTime.Now.Date
-                };
-
-                _dbContext.Cart.Add(shoppingCart);
-                _dbContext.SaveChanges();
-
-                return shoppingCart.CartId;
-            }
-            catch
-            {
-                throw;
-            }
+            Cart cart = _dbContext.Cart.Find(cartId);
+            _dbContext.Cart.Remove(cart);
+            _dbContext.SaveChanges();
         }
     }
 }

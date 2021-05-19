@@ -1,12 +1,12 @@
-using System.Linq;
-using BookCart.Interfaces;
+﻿using BookCart.Interfaces;
 using BookCart.Models;
+using System;
+using System.Linq;
 
 namespace BookCart.DataAccess
 {
-    public class UserDataAccessLayer: IUserService
+    public class UserDataAccessLayer : IUserService
     {
-        
         readonly BookDBContext _dbContext;
 
         public UserDataAccessLayer(BookDBContext dbContext)
@@ -14,16 +14,13 @@ namespace BookCart.DataAccess
             _dbContext = dbContext;
         }
 
-        
-        
         public UserMaster AuthenticateUser(UserMaster loginCredentials)
         {
-            
             UserMaster user = new UserMaster();
 
             var userDetails = _dbContext.UserMaster.FirstOrDefault(
                 u => u.Username == loginCredentials.Username && u.Password == loginCredentials.Password
-            );
+                );
 
             if (userDetails != null)
             {
@@ -85,6 +82,4 @@ namespace BookCart.DataAccess
             }
         }
     }
-
-
 }

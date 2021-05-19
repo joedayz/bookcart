@@ -1,11 +1,10 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
-import {ShoppingCart} from "../../models/shoppingcart";
-import {Subject} from "rxjs";
-import {CartService} from "../../services/cart.service";
-import {SnackbarService} from "../../services/snackbar.service";
-import {SubscriptionService} from "../../services/subscription.service";
-import {takeUntil} from "rxjs/operators";
-
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ShoppingCart } from 'src/app/models/shoppingcart';
+import { CartService } from 'src/app/services/cart.service';
+import { SnackbarService } from 'src/app/services/snackbar.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { SubscriptionService } from 'src/app/services/subscription.service';
 
 @Component({
   selector: 'app-shoppingcart',
@@ -13,26 +12,20 @@ import {takeUntil} from "rxjs/operators";
   styleUrls: ['./shoppingcart.component.scss']
 })
 export class ShoppingcartComponent implements OnInit, OnDestroy {
-
   public cartItems: ShoppingCart[];
   userId;
   totalPrice: number;
   private unsubscribe$ = new Subject<void>();
   isLoading: boolean;
 
-  constructor(private cartService: CartService,
-              private snackBarService: SnackbarService,
-              private subscriptionService: SubscriptionService) {
+  constructor(
+    private cartService: CartService,
+    private snackBarService: SnackbarService,
+    private subscriptionService: SubscriptionService) {
     this.userId = localStorage.getItem('userId');
   }
 
-
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
-
-  ngOnInit(): void {
+  ngOnInit() {
     this.cartItems = [];
     this.isLoading = true;
     this.getShoppingCartItems();
@@ -83,6 +76,7 @@ export class ShoppingcartComponent implements OnInit, OnDestroy {
           console.log('Error ocurred while addToCart data : ', error);
         });
   }
+
   deleteOneCartItem(bookId: number) {
     this.cartService.deleteOneCartItem(this.userId, bookId)
       .pipe(takeUntil(this.unsubscribe$))
@@ -95,6 +89,7 @@ export class ShoppingcartComponent implements OnInit, OnDestroy {
           console.log('Error ocurred while fetching book data : ', error);
         });
   }
+
   clearCart() {
     this.cartService.clearCart(this.userId)
       .pipe(takeUntil(this.unsubscribe$))
@@ -108,6 +103,8 @@ export class ShoppingcartComponent implements OnInit, OnDestroy {
         });
   }
 
-
-
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
 }

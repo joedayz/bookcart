@@ -1,19 +1,18 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace BookCart.Models
 {
-    public partial class BookDBContext: DbContext
+    public partial class BookDBContext : DbContext
     {
         public BookDBContext()
         {
-            
         }
-        
-        public BookDBContext(DbContextOptions<BookDBContext> options) : base(options)
-        {
 
+        public BookDBContext(DbContextOptions<BookDBContext> options)
+            : base(options)
+        {
         }
+
         public virtual DbSet<Book> Book { get; set; }
         public virtual DbSet<Cart> Cart { get; set; }
         public virtual DbSet<CartItems> CartItems { get; set; }
@@ -54,7 +53,7 @@ namespace BookCart.Models
                     .HasMaxLength(100)
                     .IsUnicode(false);
             });
-            
+
             modelBuilder.Entity<Cart>(entity =>
             {
                 entity.Property(e => e.CartId)
@@ -65,7 +64,7 @@ namespace BookCart.Models
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
             });
-            
+
             modelBuilder.Entity<CartItems>(entity =>
             {
                 entity.HasKey(e => e.CartItemId)
@@ -76,7 +75,7 @@ namespace BookCart.Models
                     .HasMaxLength(36)
                     .IsUnicode(false);
             });
-            
+
             modelBuilder.Entity<Categories>(entity =>
             {
                 entity.HasKey(e => e.CategoryId)
@@ -89,7 +88,7 @@ namespace BookCart.Models
                     .HasMaxLength(20)
                     .IsUnicode(false);
             });
-            
+
             modelBuilder.Entity<CustomerOrderDetails>(entity =>
             {
                 entity.HasKey(e => e.OrderDetailsId)
@@ -102,7 +101,7 @@ namespace BookCart.Models
 
                 entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
             });
-            
+
             modelBuilder.Entity<CustomerOrders>(entity =>
             {
                 entity.HasKey(e => e.OrderId)
@@ -153,7 +152,7 @@ namespace BookCart.Models
                     .HasMaxLength(20)
                     .IsUnicode(false);
             });
-            
+
             modelBuilder.Entity<UserType>(entity =>
             {
                 entity.Property(e => e.UserTypeId).HasColumnName("UserTypeID");

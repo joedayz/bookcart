@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -9,23 +9,27 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-
 namespace BookCart.Controllers
 {
-    
     [Route("api/[controller]")]
     public class LoginController : Controller
     {
-        private readonly IUserService _userService;
-        private readonly IConfiguration _config;
-        
+        readonly IUserService _userService;
+        readonly IConfiguration _config;
+
         public LoginController(IConfiguration config, IUserService userService)
         {
             _config = config;
             _userService = userService;
         }
 
-        public IActionResult Login([FromBody] UserMaster login)
+        /// <summary>
+        /// Login to the application
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult Login([FromBody]UserMaster login)
         {
             IActionResult response = Unauthorized();
             UserMaster user = _userService.AuthenticateUser(login);
@@ -41,9 +45,8 @@ namespace BookCart.Controllers
             }
 
             return response;
-
         }
-         
+
         string GenerateJSONWebToken(UserMaster userInfo)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:SecretKey"]));

@@ -1,35 +1,36 @@
-import {Component, Input, OnInit} from "@angular/core";
-import {Observable} from "rxjs";
-import {Book} from "../../models/book";
-import {BookService} from "../../services/book.service";
-import {ActivatedRoute} from "@angular/router";
-
+import { Component, OnInit, Input } from '@angular/core';
+import { Book } from 'src/app/models/book';
+import { BookService } from 'src/app/services/book.service';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-similarbooks',
   templateUrl: './similarbooks.component.html',
   styleUrls: ['./similarbooks.component.scss']
 })
-export class SimilarbooksComponent implements OnInit{
+export class SimilarbooksComponent implements OnInit {
 
   @Input()
   bookId: number;
 
   SimilarBook$: Observable<Book[]>;
 
-  constructor(private bookService: BookService, private route: ActivatedRoute) {
+  constructor(
+    private bookService: BookService,
+    private route: ActivatedRoute) {
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.route.params.subscribe(
-      params=>{
+      params => {
         this.bookId = +params.id;
         this.getSimilarBookData();
       }
-    )
+    );
   }
 
   getSimilarBookData() {
-    this.SimilarBook$ = this.bookService.getSimilarBooks(this.bookId);
+    this.SimilarBook$ = this.bookService.getsimilarBooks(this.bookId);
   }
 }

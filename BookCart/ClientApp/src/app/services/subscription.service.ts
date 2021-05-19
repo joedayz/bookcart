@@ -1,7 +1,7 @@
-import {Injectable} from "@angular/core";
-import {BehaviorSubject, Subject} from "rxjs";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { User } from '../models/user';
-import {Book} from "../models/book";
+import { Book } from '../models/book';
 
 @Injectable({
   providedIn: 'root'
@@ -14,5 +14,5 @@ export class SubscriptionService {
   wishlistItem$ = new BehaviorSubject<Book[]>([]);
   cartItemcount$ = new Subject<number>();
 
-  constructor() {}
+  constructor() { }
 }
