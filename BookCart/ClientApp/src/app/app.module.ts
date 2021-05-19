@@ -16,6 +16,7 @@ import { UserRegistrationComponent } from './components/user-registration/user-r
 import { HomeComponent } from './components/home/home.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.component';
+import { ThemePickerComponent } from './components/theme-picker/theme-picker.component';
 import { SimilarbooksComponent } from './components/similarbooks/similarbooks.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
@@ -41,6 +42,7 @@ import { WishlistComponent } from './components/wishlist/wishlist.component';
     HomeComponent,
     NavBarComponent,
     ShoppingcartComponent,
+    ThemePickerComponent,
     SimilarbooksComponent,
     PageNotFoundComponent,
     AddtowishlistComponent,
